@@ -45,15 +45,35 @@ module Alphasights
 			if File.exist? path
 				json     = File.read(path)
 				@dataset = JSON.parse(json)
-			true
+				true
 			else
 				@output.puts 'the file not existing'
-			false
+				false
 			end
 		end
 
+		# create a hash-like list with domain name as the key and an array of pattern numbers as the value 
+		# ex: dataset hash --> pattern list
+		#     dataset = { 
+		# 		"John Ferguson" => "john.ferguson@alphasights.com", 
+		#       "Damon Aw" => "damon.aw@alphasights.com", 
+		#       "Linda Li" => "linda.li@alphasights.com", 
+		#       "Larry Page" => "larry.p@google.com", 
+		#       "Sergey Brin" => "s.brin@google.com", 
+		#       "Steve Jobs" => "s.j@apple.com"
+		#     }    
+		#
+		#     it will be converted into 
+		#
+		#     plist = {
+		#       "alphasights.com"=>[1], 
+		#       "google.com"=>[2, 3], 
+		#       "apple.com"=>[4]}
+		#     }
+		# 
 		def createPatternList
 			@plist = @dataset.values.group_by{ |e| e.split('@')[1] }.each_pair{ |k,v| v.map!{ |e| recognize(e) }.uniq! }
+			puts @plist
 		end
 
 		def find(target)
