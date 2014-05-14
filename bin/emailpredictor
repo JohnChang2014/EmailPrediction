@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'alphasights'
+
+predictor = Alphasights::EmailPredictor.new(STDOUT)
+matcher = Alphasights::PatternMatcher.new(STDOUT).initPatternList('data/sample.json')
+predictor.start(matcher)
+while true
+	input = STDIN.gets
+	predictor.submit input
+end
