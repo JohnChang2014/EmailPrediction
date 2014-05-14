@@ -40,6 +40,6 @@ Then(/^the result should be "(.*?)"$/) do |arg1|
   	output.messages.should include(arg1)
 end
 
-When(/^I submit the fifth option "(.*?)"$/) do |arg1|
+When(/^I submit "(.*?)"$/) do |arg1|
   	@predictor.submit(arg1)
 end

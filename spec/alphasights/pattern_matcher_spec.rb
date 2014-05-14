@@ -71,8 +71,11 @@ module Alphasights
 			end
 
 			context "with no pattern matched" do
-				it "sends a message saying no pattern matched"
-				it "returns nil"
+				let(:target) { "John Chang, test.com" }
+				
+				it "returns nil" do
+					matcher.find(target).should be_nil
+				end
 			end
 		end
 

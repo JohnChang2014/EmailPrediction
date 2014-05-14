@@ -38,7 +38,7 @@ module Alphasights
 			end
 
 			it "prompts the fifth choice to enter other test sample" do
-				output.should_receive(:puts).with('5.  Enter other sample...')
+				output.should_receive(:puts).with("5.  Or enter Advisor's name and domain name (ex: john chang, alphasights.com):")
 				predictor.start(matcher)
 			end
 		end
@@ -69,12 +69,30 @@ module Alphasights
 					end
 				end
 			end
+
+			context "with specific advisor's name and domain" do
+				context "using a valid format" do
+					it "prompts a message asking for advisor's name and domain" do
+						output.should_receive(:puts).with("john.chang@alphasights.com")
+						predictor.start(matcher)
+						predictor.submit("John Chang, alphasights.com")
+					end
+				end
+
+				context "using an invalid format" do
+					it "prompts a message saying the input format is not valid" do
+						output.should_receive(:puts).with("you should type in data in the format like 'first_name last_name, domain name'")
+						predictor.start(matcher)
+						predictor.submit("John, test.com")
+					end
+				end
+			end
 			
-			context "with the fifth option" do
-				it "prompts a message asking for advisor's name and domain" do
-					output.should_receive(:puts).with("Enter Advisor's name and domain name (ex: john chang, alphasights.com):")
+			context 'with the number 6 to exit' do
+				it "sends a message saying 'Thanks you. Bye Bye!'" do
+					output.should_receive(:puts).with("Thanks you. Bye Bye!")
 					predictor.start(matcher)
-					predictor.submit('5')
+					predictor.submit('6')
 				end
 			end
 		end

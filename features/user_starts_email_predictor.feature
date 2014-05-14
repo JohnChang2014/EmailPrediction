@@ -12,4 +12,5 @@ Feature: user starts email predictor
 	And I should see "2.  Craig Silverstein, google.com"
 	And I should see "3.  Steve Wozniak, apple.com"
 	And I should see "4.  Barack Obama, whitehouse.gov"
-	And I should see "5.  Enter other sample..."
+	And I should see "5.  Or enter Advisor's name and domain name (ex: john chang, alphasights.com):"
+	And I should see "6.  Type in '6' to exit"

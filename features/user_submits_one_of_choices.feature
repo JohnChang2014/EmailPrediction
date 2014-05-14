@@ -23,7 +23,12 @@ Feature: user submits one of choices
       | number | result |
       |   4    | no answer to tell |
       
-  Scenario: ask for typing info
+  Scenario: submit specific advisor's name and domain in a valid format
     Given the sample dataset of pattern
-    When I submit the fifth option "5"
-    Then I should see "Enter Advisor's name and domain name (ex: john chang, alphasights.com):" 
+    When I submit "John Chang, alphasights.com"
+    Then I should see "john.chang@alphasights.com" 
+    
+  Scenario: submit specific advisor's name and domain in an invalid format
+    Given the sample dataset of pattern
+    When I submit "John Chang alphasights.com"
+    Then I should see "you should type in data in the format like 'first_name last_name, domain name'" 
