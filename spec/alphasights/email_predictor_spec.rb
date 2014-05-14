@@ -92,7 +92,7 @@ module Alphasights
 				it "sends a message saying 'Thanks you. Bye Bye!'" do
 					output.should_receive(:puts).with("Thanks you. Bye Bye!")
 					predictor.start(matcher)
-					predictor.submit('6')
+					lambda { predictor.submit('6') }.should raise_error SystemExit
 				end
 			end
 		end
