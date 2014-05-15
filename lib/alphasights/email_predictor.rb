@@ -73,7 +73,6 @@ module Alphasights
 		# 
 		def createPatternList
 			@plist = @dataset.values.group_by{ |e| e.split('@')[1] }.each_pair{ |k,v| v.map!{ |e| recognize(e) }.uniq! }
-			puts @plist
 		end
 
 		def find(target)
